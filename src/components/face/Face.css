@@ -1,0 +1,51 @@
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;800;900&display=swap);
+
+.face {
+    width: 100%;
+    height: 100vh;
+    background: url("../../../public/assets/imgs/face_bg.png");
+    background-size: 100%;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    padding-top: 15vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.face_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.face_right {
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
+}
+
+.face_right img {
+    width: 200px;
+}
+
+.face_left h1 {
+    font-size: 70px;
+    font-family: 'Inter', sans-serif;
+    color: #49A6D9;
+}
+.btns{
+    display: flex;
+    gap: 20px;
+}
+.btns .btn{
+    padding: 6px 20px;
+    background-color: #49A6D9;
+    border-radius: 14px;
+    color: white;
+    cursor: pointer;
+}
