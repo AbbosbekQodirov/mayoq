@@ -1,0 +1,52 @@
+.FiremanSignUp {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    background: url("../../../public/assets/imgs/firemansBg.png");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-left: 60px;
+}
+
+.signUp {
+    border-radius: 20px;
+    background-color: #49A6D9;
+    padding: 20px 30px;
+    padding-top: 50px;
+}
+
+.signUp form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signUp form input {
+    width: 400px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    outline: none;
+    padding: 3px 5px;
+    font-size: 20px;
+    color: white;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.signUp form input::placeholder {
+    color: rgba(255, 255, 255, 0.798);
+}
+
+.signUp form button {
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 30px;
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 20px;
+    color: #49A6D9;
+    cursor: pointer;
+}

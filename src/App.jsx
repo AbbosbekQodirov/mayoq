@@ -5,19 +5,27 @@ import Firemans from './pages/firemans/Firemans';
 import Polices from './pages/polices/Polices';
 import Transports from './pages/transports/Transports';
 import Face from './components/face/Face';
+import Dashboard from './components/dashboard/Dashboard';
+import { useState } from 'react';
 
 function App() {
 
+  const [showModal, setShowModal] = useState(true)
+
   return (
-    <BrowserRouter>
-        <Face/>
-      <Routes>
-        <Route path="/doctors" element={<Doctors />}></Route>
-        <Route path="/firemans" element={<Firemans />}></Route>
-        <Route path="/polices" element={<Polices />}></Route>
-        <Route path="/transports" element={<Transports />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+        <Face setShowModal={setShowModal} showModal={showModal} />
+
+        <Routes>
+          <Route path="/" element={<Dashboard />}></Route>
+          <Route path="/doctors" element={<Doctors />}></Route>
+          <Route path="/firemans" element={<Firemans />}></Route>
+          <Route path="/polices" element={<Polices />}></Route>
+          <Route path="/transports" element={<Transports />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 
