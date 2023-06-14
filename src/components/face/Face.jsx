@@ -13,9 +13,9 @@ function Face() {
           </div>
         </div>
         <div className="face_right">
-          <img src="./public/assets/imgs/fireman.png" alt="" />
-          <img src="./public/assets/imgs/police.png" alt="" />
-          <img src="./public/assets/imgs/doctor.png" alt="" />
+          <img src="./assets/imgs/fireman.png" alt="" />
+          <img src="./assets/imgs/police.png" alt="" />
+          <img src="./assets/imgs/doctor.png" alt="" />
         </div>
         <div></div>
       </div>
