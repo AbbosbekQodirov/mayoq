@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 function Firemans() {
   const navigate = useNavigate()
   const handleSubmit = (e)=>{
-    navigate("/")
     e.preventDefault()
+    navigate("/map")
   }
   return (
     <div className="FiremanSignUp">

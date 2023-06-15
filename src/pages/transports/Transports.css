@@ -15,6 +15,7 @@
     background-color: #49A6D9;
     padding: 20px 30px;
     padding-top: 50px;
+    
 }
 
 .signUp form {
@@ -49,4 +50,5 @@
     border-radius: 20px;
     color: #49A6D9;
     cursor: pointer;
+    background-color: white;
 }

@@ -7,6 +7,7 @@ import Transports from './pages/transports/Transports';
 import Face from './components/face/Face';
 import Dashboard from './components/dashboard/Dashboard';
 import { useState } from 'react';
+import Map from './components/map/Map';
 
 function App() {
 
@@ -16,13 +17,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Face setShowModal={setShowModal} showModal={showModal} />
-
         <Routes>
           <Route path="/" element={<Dashboard />}></Route>
           <Route path="/doctors" element={<Doctors />}></Route>
           <Route path="/firemans" element={<Firemans />}></Route>
           <Route path="/polices" element={<Polices />}></Route>
           <Route path="/transports" element={<Transports />}></Route>
+          <Route path="/map" element={<Map/>}></Route>
         </Routes>
       </BrowserRouter>
     </div>

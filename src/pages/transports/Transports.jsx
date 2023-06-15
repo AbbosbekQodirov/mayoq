@@ -6,7 +6,7 @@ function Transports() {
   const navigate = useNavigate()
   const handleSubmit = (e)=>{
     e.preventDefault()
-    navigate("/")
+    navigate("/map")
   }
   return (
     <div className="TransportsSignUp">
