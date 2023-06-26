@@ -8,10 +8,30 @@ import Face from './components/face/Face';
 import Dashboard from './components/dashboard/Dashboard';
 import { useState } from 'react';
 import Map from './components/map/Map';
+import Table from './components/table/Table';
+import { useEffect } from 'react';
+
+import { db } from "./firebase";
+import { onValue, ref, set } from "firebase/database";
 
 function App() {
 
   const [showModal, setShowModal] = useState(true)
+  const [datas, setDatas] = useState([])
+
+  useEffect(() => {
+    console.log("loading");
+    onValue(ref(db), async (snapshot) => {
+      const data = snapshot.val();
+
+      if (data !== null) {
+        const datas = [];
+        datas.push(data);
+        setDatas(datas);
+      }
+    });
+  }, []);
+
 
   return (
     <div className="App">
@@ -23,7 +43,15 @@ function App() {
           <Route path="/firemans" element={<Firemans />}></Route>
           <Route path="/polices" element={<Polices />}></Route>
           <Route path="/transports" element={<Transports />}></Route>
-          <Route path="/map" element={<Map/>}></Route>
+          {datas.length ? (
+            <Route path="/map" element={<Map datas={datas && datas} />}></Route>
+          ) : null}
+          {datas.length && (
+            <Route
+              path="/table"
+              element={<Table datas={datas && datas} />}
+            ></Route>
+          )}
         </Routes>
       </BrowserRouter>
     </div>

@@ -11,6 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { useGeolocated } from "react-geolocated";
 import { FaLocationArrow, FaTimes } from "react-icons/fa";
+import { FaCarSide } from "react-icons/fa";
+import carIcon from "../../assets/car.svg";
 
 import {
   useJsApiLoader,
@@ -18,16 +20,41 @@ import {
   Marker,
   Autocomplete,
   DirectionsRenderer,
+  InfoWindow,
 } from "@react-google-maps/api";
 import React, { useRef, useState } from "react";
 
-function App() {
-  const center = { lat: 40.38298485291166, lng: 71.78271857530021 };
-  const center1 = { lat: 40.38290485291166, lng: 71.78271857530021 };
+function Map({ datas }) {
+  ///////
+
+  ///////
+
+  const [showMarker, setShowMarker] = useState(false);
+
+  //workers 
+  const workers = Object.values(datas[0]?.workers);
+
+  //user
+   const users = Object.values(datas[0].emergency_calls);
+
+   console.log(users);
+  // for line
+  const latStart = Number(workers[0].lat);
+  const lngStart = Number(workers[0].long);
+
+  const latEnd = Number(users[0].user_location_lat);
+  const lngEnd = Number(users[0].user_location_long);
+
+  console.log(latEnd, lngEnd);
+  //for line end
+
+  const [selected, setSelected] = useState(null);
+  const [center, setCenter] = useState({
+    lat: 40.38298485291166,
+    lng: 71.78271807530021,
+  });
 
   const { coords } = useGeolocated();
-
-  // console.log(coords.latitude, coords.longitude);
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyANHJAE_PRvZDcO4akRZROTjcjnH3vwPXA",
@@ -54,19 +81,15 @@ function App() {
   }
 
   async function calculateRoute() {
-    console.log("iii");
-    if (originRef.current.value === "" || destiantionRef.current.value === "") {
-      return;
-    }
-
     // eslint-disable-next-line no-undef
     const directionsService = new google.maps.DirectionsService();
     const results = await directionsService.route({
-      origin: originRef.current.value,
-      destination: destiantionRef.current.value,
-      // eslint-disable-next-line no-undef
+      origin: new google.maps.LatLng(latStart, lngStart),
+      destination: new google.maps.LatLng(latEnd, lngEnd),
+    // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
     });
+
     setDirectionsResponse(results);
     setDistance(results.routes[0].legs[0].distance.text);
     setDuration(results.routes[0].legs[0].duration.text);
@@ -94,20 +117,60 @@ function App() {
       <Box position="absolute" left={0} top={0} h="100%" w="100%">
         <GoogleMap
           center={center}
-          zoom={15}
+          zoom={12}
           mapContainerStyle={{ width: "100%", height: "100%" }}
           onLoad={(map) => setMap(map)}
+          // onDrag={()=>{
+          //   setCenter(null)
+          // }}
         >
-          <Marker position={center}></Marker>
+          {/* {coords && (
+            <Marker
+              position={{
+                lat: coords.latitude,
+                lng: coords.longitude,
+              }}
+            ></Marker>
+          )} */}
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
-          <Marker position={center1}></Marker>
-          {coords && (
-            <Marker
-              position={{ lat: coords.latitude, lng: coords.longitude }}
-            ></Marker>
-          )}
+          {workers.map((marker) => {
+            const location = {
+              lat: Number(marker.lat),
+              lng: Number(marker.long),
+            };
+            return (
+              <div key={marker.id}>
+                {showMarker && (
+                  <Marker
+                    key={marker.car_number}
+                    position={location}
+                    icon={carIcon}
+                    onClick={() => {
+                      setSelected(marker);
+                    }}
+                  ></Marker>
+                )}
+              </div>
+            );
+          })}
+          {selected ? (
+            <InfoWindow
+              position={{
+                lat: Number(selected.lat),
+                lng: Number(selected.long),
+              }}
+              onCloseClick={() => {
+                setSelected(null);
+              }}
+            >
+              <div>
+                <h2>salom</h2>
+                <p>Auto number</p>
+              </div>
+            </InfoWindow>
+          ) : null}
         </GoogleMap>
       </Box>
 
@@ -117,40 +180,28 @@ function App() {
         mt={4}
         bgColor="white"
         shadow="base"
-        minW="container.md"
+        minW="container.ms"
         zIndex="9"
       >
         <HStack spacing={4}>
-          <Autocomplete>
-            <Input type="text" placeholder="Origin" ref={originRef} />
-          </Autocomplete>
-          <Autocomplete>
-            <Input type="text" placeholder="Destination" ref={destiantionRef} />
-          </Autocomplete>
           <ButtonGroup>
-            <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
-              Calculate Route
+            <Button
+              colorScheme="pink"
+              type="submit"
+              onClick={() => {
+                setShowMarker(!showMarker);
+              }}
+            >
+              {showMarker ? <h2> hide Workers</h2> : <h2> Show Workers</h2>}
             </Button>
-            <IconButton
-              aria-label="center back"
-              icon={<FaTimes />}
-              onClick={clearRoute}
-            />
+            <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
+              Show Line
+            </Button>
           </ButtonGroup>
-        </HStack>
-        <HStack spacing={4} mt={4} justifyContent="space-between">
-          <Text>Distance: {distance} </Text>
-          <Text>Duration: {duration} </Text>
-          <IconButton
-            aria-label="center back"
-            icon={<FaLocationArrow />}
-            isRound
-            onClick={() => map.panTo(center)}
-          />
         </HStack>
       </Box>
     </Flex>
   );
 }
 
-export default App;
+export default Map;
