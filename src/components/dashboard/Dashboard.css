@@ -9,6 +9,8 @@
 .dashboard h1{
     font-size: 40px;
     color: #49A6D9;
+    font-weight: 700;
+    letter-spacing: 2px;
 }
 .links{
     width: 500px;

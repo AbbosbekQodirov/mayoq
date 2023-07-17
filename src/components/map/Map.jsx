@@ -23,6 +23,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Map({ datas }) {
   ///////
@@ -31,13 +32,13 @@ function Map({ datas }) {
 
   const [showMarker, setShowMarker] = useState(false);
 
-  //workers 
+  //workers
   const workers = Object.values(datas[0]?.workers);
 
   //user
-   const users = Object.values(datas[0].emergency_calls);
+  const users = Object.values(datas[0].emergency_calls);
 
-   console.log(users);
+  console.log(users);
   // for line
   const latStart = Number(workers[0].lat);
   const lngStart = Number(workers[0].long);
@@ -86,7 +87,7 @@ function Map({ datas }) {
     const results = await directionsService.route({
       origin: new google.maps.LatLng(latStart, lngStart),
       destination: new google.maps.LatLng(latEnd, lngEnd),
-    // eslint-disable-next-line no-undef
+      // eslint-disable-next-line no-undef
       travelMode: google.maps.TravelMode.DRIVING,
     });
 
@@ -166,8 +167,7 @@ function Map({ datas }) {
               }}
             >
               <div>
-                <h2>salom</h2>
-                <p>Auto number</p>
+               <h2> salom</h2>
               </div>
             </InfoWindow>
           ) : null}
@@ -186,17 +186,24 @@ function Map({ datas }) {
         <HStack spacing={4}>
           <ButtonGroup>
             <Button
-              colorScheme="pink"
+              colorScheme="blue"
               type="submit"
               onClick={() => {
                 setShowMarker(!showMarker);
               }}
             >
-              {showMarker ? <h2> hide Workers</h2> : <h2> Show Workers</h2>}
+              {showMarker ? (
+                <h2>Hodimlarni ko'rsatmaslik</h2>
+              ) : (
+                <h2>Hodimllarni ko'rsatish</h2>
+              )}
             </Button>
-            <Button colorScheme="pink" type="submit" onClick={calculateRoute}>
-              Show Line
+            <Button colorScheme="blue" type="submit" onClick={calculateRoute}>
+              Yo'l chizig'ini ko'rsatish
             </Button>
+            <Link to="/table">
+              <Button colorScheme="blue">Umumiy chaqiruvlar ro’yxati</Button>
+            </Link>
           </ButtonGroup>
         </HStack>
       </Box>

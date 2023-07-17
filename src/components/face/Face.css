@@ -1,4 +1,4 @@
-
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;800;900&display=swap);
 .face {
     position: absolute;
     top: 0px;
@@ -40,13 +40,17 @@
 }
 
 .face_right img {
-    width: 180px;
+    width: 200px;
+    box-shadow: 10px 10px 50px 10px rgba(0, 0, 0, 0.338);
 }
 
 .face_left h1 {
     font-size: 70px;
-   
     color: #49A6D9;
+    line-height: 80px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    margin-bottom: 10px;
 }
 .btns{
     display: flex;
@@ -55,7 +59,16 @@
 .btns .btn{
     padding: 6px 20px;
     background-color: #49A6D9;
-    border-radius: 16px;
+    border-radius: 18px;
     color: white;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btns .btn img{
+    display: flex;
+    width: 18px;
+    object-fit: contain;
 }

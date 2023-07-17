@@ -3,7 +3,7 @@ import "./Face.css"
 
 function Face({ setShowModal, showModal }) {
   return (
-    <div className={showModal? "face" : "face close"}>
+    <div className={showModal ? "face" : "face close"}>
       <div className="container face_container">
         <div className="face_left">
           <h1>
@@ -24,7 +24,7 @@ function Face({ setShowModal, showModal }) {
               }}
               className="btn"
             >
-              Kirish
+              Kirish <img src="./assets/imgs/arrow.png" alt="" />
             </div>
           </div>
         </div>
