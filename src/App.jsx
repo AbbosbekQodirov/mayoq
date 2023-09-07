@@ -3,7 +3,7 @@ import './App.css'
 import Doctors from './pages/doctors/Doctors'
 import Firemans from './pages/firemans/Firemans';
 import Polices from './pages/polices/Polices';
-import Transports from './pages/transports/Transports';
+import Transports from './pages/transports/Transports'; 
 import Face from './components/face/Face';
 import Dashboard from './components/dashboard/Dashboard';
 import { useState } from 'react';
