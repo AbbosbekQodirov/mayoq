@@ -17,6 +17,7 @@ import { onValue, ref, set } from "firebase/database";
 function App() {
 
   const [showModal, setShowModal] = useState(true)
+  const [auth, setAuth] = useState("")
   const [datas, setDatas] = useState([])
 
   useEffect(() => {
@@ -36,13 +37,16 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Face setShowModal={setShowModal} showModal={showModal} />
+        <Face setAuth={setAuth} auth={auth} />
         <Routes>
           <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/doctors" element={<Doctors />}></Route>
-          <Route path="/firemans" element={<Firemans />}></Route>
-          <Route path="/polices" element={<Polices />}></Route>
-          <Route path="/transports" element={<Transports />}></Route>
+          <Route path="/doctors" element={<Doctors auth={auth} />}></Route>
+          <Route path="/firemans" element={<Firemans auth={auth} />}></Route>
+          <Route path="/polices" element={<Polices auth={auth} />}></Route>
+          <Route
+            path="/transports"
+            element={<Transports auth={auth} />}
+          ></Route>
           {datas.length ? (
             <Route path="/map" element={<Map datas={datas && datas} />}></Route>
           ) : null}

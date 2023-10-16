@@ -1,9 +1,10 @@
 import React from 'react'
 import "./Face.css"
 
-function Face({ setShowModal, showModal }) {
+function Face({ setAuth , auth}) {
+  console.log(auth);
   return (
-    <div className={showModal ? "face" : "face close"}>
+    <div className={auth.length == "" ? "face" : "face close"}>
       <div className="container face_container">
         <div className="face_left">
           <h1>
@@ -12,7 +13,7 @@ function Face({ setShowModal, showModal }) {
           <div className="btns">
             <div
               onClick={() => {
-                setShowModal(!showModal);
+                setAuth("SIGNUP")
               }}
               className="btn"
             >
@@ -20,7 +21,7 @@ function Face({ setShowModal, showModal }) {
             </div>
             <div
               onClick={() => {
-                setShowModal(!showModal);
+                setAuth("LOGIN");
               }}
               className="btn"
             >

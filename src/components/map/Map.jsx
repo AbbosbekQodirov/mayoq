@@ -121,6 +121,10 @@ function Map({ datas }) {
           zoom={12}
           mapContainerStyle={{ width: "100%", height: "100%" }}
           onLoad={(map) => setMap(map)}
+          onClick={(event) => {
+            console.log("lat" , event.latLng.lat());
+            console.log("long" , event.latLng.lng());
+          }}
           // onDrag={()=>{
           //   setCenter(null)
           // }}
@@ -167,7 +171,7 @@ function Map({ datas }) {
               }}
             >
               <div>
-               <h2> salom</h2>
+                <h2> salom</h2>
               </div>
             </InfoWindow>
           ) : null}
